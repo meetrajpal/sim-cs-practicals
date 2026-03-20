@@ -11,11 +11,6 @@ namespace sim_cs_practicals
 
         public String Customer_Name { get; set; }
 
-        //public Customer_Account()
-        //{
-        //    this.Bank_Name = "";
-        //}
-
         public Customer_Account(long accNo, String custName)
         {
             this.Customer_AccountNo = accNo;
@@ -26,11 +21,11 @@ namespace sim_cs_practicals
          * 
          This method will print all the information about customer account and will not return anything.
          */
-        public void printInfo()
+        public void PrintInfo()
         {
-            Console.WriteLine($"Bank name: {this.Bank_Name}");
-            Console.WriteLine($"Account number: {this.Customer_AccountNo}");
             Console.WriteLine($"Customer name: {this.Customer_Name}");
+            Console.WriteLine($"Account number: {this.Customer_AccountNo}");
+            Console.WriteLine($"Bank name: {this.Bank_Name}");
         }
     }
     class Practical2
@@ -38,7 +33,7 @@ namespace sim_cs_practicals
         public static void main(String[] args)
         {
             Customer_Account custAcc = new Customer_Account(132564987L, "Meet Rajpal") { Bank_Name = "BOB"};
-            custAcc.printInfo();
+            custAcc.PrintInfo();
         }
     }
 }
