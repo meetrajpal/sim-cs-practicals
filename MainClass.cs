@@ -11,7 +11,7 @@
             //Practical2.main([]);
 
             // ========== Practical 3 ==========
-            Practical3.main([]);
+            //Practical3.main([]);
 
             // ========== Practical 4 ==========
             //Practical4.main([]);
@@ -21,6 +21,9 @@
 
             // ========== Practical 6 ==========
             //Practical6.main([]);
+
+            // ========== Practical 7 ==========
+            Practical7.main([]);
         }
     }
 }
