@@ -53,23 +53,18 @@
 
 
         //Abstraction
-        class Laptop
+        abstract class Laptop
         {
 
             private string brand;
             private string model;
-            public string Brand { get { return this.brand; } set { this.brand = value; } } // We can use short form also: public string Brand { get; set; }
+            public string Brand { get { return this.brand; } set { this.brand = value; } } // We can use short form also: public string Brand { get; set; } then we will not need to declare fields explicitly, private fields will be created automatically.
             public string Model { get { return this.model; } set { this.model = value; } }
 
             /*
              * This method prints details about laptop and will return void / nothing
              */
-            public void LaptopDetails()
-            {
-                Console.WriteLine($"\nBrand: {this.Brand}");
-                Console.WriteLine($"Model: {this.Model}");
-                this.MotherboardDetails();
-            }
+            public abstract void LaptopDetails();
 
             /*
              * This method prints "Motherboard Details" and will return void / nothing
@@ -78,6 +73,15 @@
             private void MotherboardDetails()
             {
                 Console.WriteLine("Motherboard Details");
+            }
+        }
+
+        class GamingLaptop : Laptop
+        {
+            public override void LaptopDetails()
+            {
+                Console.WriteLine($"\nBrand: {this.Brand}");
+                Console.WriteLine($"Model: {this.Model}");
             }
         }
 
@@ -91,9 +95,9 @@
             Bird duck = new Duck();
             duck.Voice();
 
-            Laptop laptop = new Laptop();
+            GamingLaptop laptop = new GamingLaptop();
             laptop.Brand = "Lenovo";
-            laptop.Model = "Ideapad S145";
+            laptop.Model = "Legion LOQ";
             laptop.LaptopDetails();
             // laptop.MotherboardDetails(); accessing this method will give error because it is private to its class
         }
