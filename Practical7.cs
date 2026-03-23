@@ -213,16 +213,17 @@
             Console.WriteLine($"Initial available balance for {user.Username} is {user.AvailableBalance}\n");
 
             paymentProcessor.Pay(555.25M);
-
             Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
 
             paymentProcessor.Pay(1000);
-
             Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
 
             RefundProcessor refundProcessor = new RefundProcessor(user, upiPayment, consoleLogger);
-            refundProcessor.Refund(555.25M);
 
+            refundProcessor.Refund(555.25M);
+            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+
+            refundProcessor.Refund(130);
             Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
         }
     }
