@@ -93,8 +93,8 @@
         {
             private User _user;
             readonly private IPaymentMethod _paymentMethod;
-            readonly private ILogger _logger;
-            public PaymentProcessor(User user, IPaymentMethod obj, ILogger loggerObj)
+            readonly private Logger _logger;
+            public PaymentProcessor(User user, IPaymentMethod obj, Logger loggerObj)
             {
                 _user = user;
                 _paymentMethod = obj;
@@ -128,9 +128,9 @@
         {
             private User _user;
             readonly private IRefundable _refundObj;
-            readonly private ILogger _logger;
+            readonly private Logger _logger;
 
-            public RefundProcessor(User user, IRefundable refundObj, ILogger logObj)
+            public RefundProcessor(User user, IRefundable refundObj, Logger logObj)
             {
                 _user = user;
                 _refundObj = refundObj;
@@ -162,34 +162,34 @@
          * Any more logging method can be included without modifying existing code.
          */
 
-        interface ILogger
+        abstract class Logger
         {
-            public void LogInfo(string msg);
-            public void LogError(string msg);
+            public abstract void LogInfo(string msg);
+            public abstract void LogError(string msg);
         }
 
 
-        class ConsoleLogger : ILogger
+        class ConsoleLogger : Logger
         {
-            void ILogger.LogError(string msg)
+            public override void LogError(string msg)
             {
                 Console.WriteLine($"Logging in console: ERROR: {msg}");
             }
 
-            void ILogger.LogInfo(string msg)
+            public override void LogInfo(string msg)
             {
                 Console.WriteLine($"Logging in console: INFO: {msg}");
             }
         }
 
-        class FileLogger : ILogger
+        class FileLogger : Logger
         {
-            void ILogger.LogError(string msg)
+            public override void LogError(string msg)
             {
                 Console.WriteLine($"Logging in File: ERROR: {msg}");
             }
 
-            void ILogger.LogInfo(string msg)
+            public override void LogInfo(string msg)
             {
                 Console.WriteLine($"Logging in File: INFO: {msg}");
             }
