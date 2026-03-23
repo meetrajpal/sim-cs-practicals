@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace sim_cs_practicals
+﻿namespace sim_cs_practicals
 {
     class Customer_Account
     {
         public string Bank_Name { get; set; }
-        public long Customer_AccountNo { get; set; } 
+        public long Customer_AccountNo { get; set; }
 
         public String Customer_Name { get; set; }
 
@@ -18,8 +14,7 @@ namespace sim_cs_practicals
         }
 
         /*
-         * 
-         This method will print all the information about customer account and will not return anything.
+         * This method will return void / nothing and it will print all the information about customer account.
          */
         public void PrintInfo()
         {
@@ -32,7 +27,7 @@ namespace sim_cs_practicals
     {
         public static void main(String[] args)
         {
-            Customer_Account custAcc = new Customer_Account(132564987L, "Meet Rajpal") { Bank_Name = "BOB"};
+            Customer_Account custAcc = new Customer_Account(132564987L, "Meet Rajpal") { Bank_Name = "BOB" };
             custAcc.PrintInfo();
         }
     }

@@ -10,7 +10,7 @@
 
         class Team : Sponsor
         {
-            string TeamName  { get; set; }
+            string TeamName { get; set; }
 
             public Team(string teamName)
             {
@@ -18,8 +18,7 @@
             }
 
             /*
-             * 
-             This method will print _owner value and TeamName value and will return nothing.
+             * This method will return void / nothing and will print _owner value and TeamName value.
              */
             public void PrintInfo()
             {
@@ -33,8 +32,7 @@
         class Bird
         {
             /*
-             *
-             This method will return nothing and will print "Turr Turr"
+             * This method will return void / nothing and will print "Turr Turr"
              */
             public virtual void Voice()
             {
@@ -45,8 +43,7 @@
         class Duck : Bird
         {
             /*
-             *
-             This method will return nothing and will print "Quack Quack"
+             * This method will return void / nothing and will print "Quack Quack"
              */
             public override void Voice() // If we dont override the method then it will hide the method and when creating Parent (Bird) reference with Child (Duck) object then it will call Parent class method (prints Turr Turr) only
             {
@@ -61,12 +58,11 @@
 
             private string brand;
             private string model;
-            public string Brand { get{ return this.brand; } set { this.brand = value; } } // We can use short form also: public string Brand { get; set; }
-            public string Model { get { return this.model; } set { this.model = value;} }
+            public string Brand { get { return this.brand; } set { this.brand = value; } } // We can use short form also: public string Brand { get; set; }
+            public string Model { get { return this.model; } set { this.model = value; } }
 
             /*
-             * 
-             This method prints details about laptop and will return nothing
+             * This method prints details about laptop and will return void / nothing
              */
             public void LaptopDetails()
             {
@@ -76,9 +72,8 @@
             }
 
             /*
-             * 
-             This method prints "Motherboard Details" and will return nothing
-             Also this method is private so it can not be accessed out side of the class but can be accessed inside the class
+             * This method prints "Motherboard Details" and will return void / nothing
+             * This method is private so it can not be accessed out side of the class but can be accessed inside the class
              */
             private void MotherboardDetails()
             {
