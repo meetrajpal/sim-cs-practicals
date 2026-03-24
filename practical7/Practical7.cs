@@ -1,5 +1,6 @@
-﻿using sim_cs_practicals.practical7.loggers;
-using sim_cs_practicals.practical7.payment_methods;
+﻿using sim_cs_practicals.practical7.srp_dip;
+using sim_cs_practicals.practical7.isp_lsp;
+using sim_cs_practicals.practical7.ocp_lsp;
 
 namespace sim_cs_practicals.practical7
 {
@@ -26,12 +27,12 @@ namespace sim_cs_practicals.practical7
                     }
                     else
                     {
-                        ConsoleLogger consoleLogger = new ConsoleLogger();
-                        FileLogger fileLogger = new FileLogger();
+                        ConsoleLogger consoleLogger = ConsoleLogger.GetInstance();
+                        FileLogger fileLogger = FileLogger.GetInstance();
 
-                        UPIPayment upiPayment = new UPIPayment();
-                        CashPayment cashPayment = new CashPayment();
-                        CreditCardPayment creditCardPayment = new CreditCardPayment();
+                        UPIPayment upiPayment = UPIPayment.GetInstance();
+                        CashPayment cashPayment = CashPayment.GetInstance();
+                        CreditCardPayment creditCardPayment = CreditCardPayment.GetInstance();
 
                         PaymentProcessor paymentProcessor;
                         RefundProcessor refundProcessor;

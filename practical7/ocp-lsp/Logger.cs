@@ -1,4 +1,4 @@
-﻿namespace sim_cs_practicals.practical7.loggers
+﻿namespace sim_cs_practicals.practical7.ocp_lsp
 {
     /// <summary>
     /// (Open - Close Principle)

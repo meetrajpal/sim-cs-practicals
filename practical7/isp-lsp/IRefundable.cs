@@ -1,4 +1,4 @@
-﻿namespace sim_cs_practicals.practical7.interfaces
+﻿namespace sim_cs_practicals.practical7.isp_lsp
 {
 
     /// <summary>

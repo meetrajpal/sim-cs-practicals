@@ -1,6 +1,6 @@
-﻿using sim_cs_practicals.practical7.loggers;
+﻿using sim_cs_practicals.practical7.ocp_lsp;
 
-namespace sim_cs_practicals.practical7
+namespace sim_cs_practicals.practical7.srp_dip
 {
     /// <summary>
     /// (Single Responsibility)

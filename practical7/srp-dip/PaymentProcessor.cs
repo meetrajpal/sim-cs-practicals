@@ -1,7 +1,7 @@
-﻿using sim_cs_practicals.practical7.interfaces;
-using sim_cs_practicals.practical7.loggers;
+﻿using sim_cs_practicals.practical7.isp_lsp;
+using sim_cs_practicals.practical7.ocp_lsp;
 
-namespace sim_cs_practicals.practical7
+namespace sim_cs_practicals.practical7.srp_dip
 {
     /// <summary>
     /// (Dependency Inversion)
