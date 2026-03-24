@@ -9,10 +9,10 @@ namespace sim_cs_practicals.practical7.srp_dip
     /// </summary>
     class PaymentProcessor
     {
-        private User _user;
+        private UserManager _user;
         readonly private IPaymentMethod _paymentMethod;
         readonly private Logger _logger;
-        public PaymentProcessor(User user, IPaymentMethod obj, Logger loggerObj)
+        public PaymentProcessor(UserManager user, IPaymentMethod obj, Logger loggerObj)
         {
             _user = user;
             _paymentMethod = obj;

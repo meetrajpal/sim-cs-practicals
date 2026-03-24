@@ -9,7 +9,7 @@ namespace sim_cs_practicals.practical7.srp_dip
     /// RefundProcessor processes the refund.
     /// Logger classes logs the operations.
     /// </summary>
-    class User
+    class UserManager
     {
         readonly private Logger _logger;
         public string Username { get; set; }
@@ -17,7 +17,7 @@ namespace sim_cs_practicals.practical7.srp_dip
         public List<decimal> paymentHistory = new List<decimal>();
         public decimal AvailableBalance { get; set; }
 
-        public User(string name, decimal amount, Logger logger)
+        public UserManager(string name, decimal amount, Logger logger)
         {
             Username = name;
             AvailableBalance = amount;

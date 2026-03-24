@@ -9,11 +9,11 @@ namespace sim_cs_practicals.practical7.srp_dip
     /// </summary>
     class RefundProcessor
     {
-        private User _user;
+        private UserManager _user;
         readonly private IRefundable _refundObj;
         readonly private Logger _logger;
 
-        public RefundProcessor(User user, IRefundable refundObj, Logger logObj)
+        public RefundProcessor(UserManager user, IRefundable refundObj, Logger logObj)
         {
             _user = user;
             _refundObj = refundObj;

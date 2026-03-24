@@ -37,7 +37,7 @@ namespace sim_cs_practicals.practical7
                         PaymentProcessor paymentProcessor;
                         RefundProcessor refundProcessor;
 
-                        User user = new User(uname, openingBalance, fileLogger);
+                        UserManager user = new UserManager(uname, openingBalance, fileLogger);
 
                         Console.WriteLine($"Initial available balance for {user.Username} is {user.AvailableBalance}\n");
 
