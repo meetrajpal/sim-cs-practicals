@@ -4,10 +4,9 @@
     {
         public static void main(String[] args)
         {
-            ProcessBusinessLogic publisher = new ProcessBusinessLogic();
+            ProcessBusinessLogic.Subscribe(Subscriber.bl_ProcessComplete);
 
-            ProcessBusinessLogic.ProcessCompleted += Subscriber.bl_ProcessComplete;
-
+            ProcessBusinessLogic publisher = ProcessBusinessLogic.GetInstance();
             publisher.StartProcess();
         }
     }

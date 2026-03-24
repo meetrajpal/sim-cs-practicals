@@ -3,8 +3,8 @@
 //using sim_cs_practicals.practical3;
 //using sim_cs_practicals.practical4;
 //using sim_cs_practicals.practical5;
-//using sim_cs_practicals.practical6;
-using sim_cs_practicals.practical7;
+using sim_cs_practicals.practical6;
+//using sim_cs_practicals.practical7;
 //using sim_cs_practicals.practical8;
 namespace sim_cs_practicals
 {
@@ -28,10 +28,10 @@ namespace sim_cs_practicals
             //Practical5.main([]);
 
             // ========== Practical 6 ==========
-            //Practical6.main([]);
+            Practical6.main([]);
 
             // ========== Practical 7 ==========
-            Practical7.main([]);
+            //Practical7.main([]);
 
             // ========== Practical 8 ==========
             //Practical8.main([]);
