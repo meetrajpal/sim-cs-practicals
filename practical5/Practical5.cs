@@ -1,4 +1,4 @@
-﻿namespace sim_cs_practicals
+﻿namespace sim_cs_practicals.practical5
 {
     class Practical5
     {
