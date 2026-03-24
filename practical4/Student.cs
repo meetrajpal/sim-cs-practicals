@@ -5,8 +5,7 @@
         public decimal[] Marks;
         public string Name { get; set; }
 
-        public static decimal AverageMarks;
-
+        //public static decimal AverageMarks; // There is no need of this variable but in practical it is told to define here.
         public Student(string name, int subjectCount)
         {
             this.Name = name;
