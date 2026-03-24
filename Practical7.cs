@@ -11,24 +11,37 @@
          */
         class User
         {
+            private Logger _logger;
             public string Username { get; set; }
 
             public List<decimal> paymentHistory = new List<decimal>();
-
-            private decimal availableBalance;
             public decimal AvailableBalance { get; set; }
 
-
-            public User(string name, decimal amount)
+            public User(string name, decimal amount, Logger logger)
             {
-                this.Username = name;
-                if (amount < 1000)
+                Username = name;
+                AvailableBalance = amount;
+                _logger = logger;
+                _logger.LogInfo($"User created successfully with username: {this.Username}");
+            }
+
+            /*
+             * This method will return void / nothing and will add balance to user's available balance
+             */
+            public void AddBalance(decimal amount)
+            {
+                _logger.LogInfo($"Process of adding balance started for user: {this.Username}");
+                if (amount < 1)
                 {
-                    Console.WriteLine("Initial minimum balance cannot be less than 1000.");
+                    Console.WriteLine("You can not add balance less than Rs. 1");
+                    _logger.LogError($"Adding balance is less than Rs. 1 for user: {this.Username}");
+                    _logger.LogInfo($"Stopped process of adding balance due to error for user: {this.Username}");
                 }
                 else
                 {
-                    this.AvailableBalance = amount;
+                    AvailableBalance += amount;
+                    Console.WriteLine($"Rs. {amount} added successfully. Available balance is Rs. {this.AvailableBalance}");
+                    _logger.LogInfo($"Process of adding balance completed successfully for user: {this.Username}");
                 }
             }
         }
@@ -58,7 +71,7 @@
         {
             public void Pay(decimal amount)
             {
-                Console.WriteLine($"Paying {amount} through cash....");
+                Console.WriteLine($"Paying Rs. {amount} through cash....");
             }
         }
 
@@ -66,12 +79,12 @@
         {
             public void Pay(decimal amount)
             {
-                Console.WriteLine($"Paying {amount} through UPI ID...");
+                Console.WriteLine($"Paying Rs. {amount} through UPI ID...");
             }
 
             public void Refund(decimal amount)
             {
-                Console.WriteLine($"Refunding {amount} through UPI ID....");
+                Console.WriteLine($"Refunding Rs. {amount} through UPI ID....");
             }
         }
 
@@ -79,7 +92,7 @@
         {
             public void Pay(decimal amount)
             {
-                Console.WriteLine($"Paying {amount} through Credit Card...");
+                Console.WriteLine($"Paying Rs. {amount} through Credit Card...");
             }
         }
 
@@ -103,11 +116,17 @@
 
             public void Pay(decimal amount)
             {
-                _logger.LogInfo($"Payment initiated for amount {amount} for user: {_user.Username}...");
-                if (amount > _user.AvailableBalance)
+                _logger.LogInfo($"Payment initiated for amount Rs. {amount} for user: {_user.Username}...");
+                if (amount < 1)
                 {
-                    Console.WriteLine($"You can not pay more. Paying {amount} is more than available amount {this._user.AvailableBalance}.");
-                    _logger.LogError($"Not enough available balance in {_user.Username} user's account: Paying amount is {amount} and available amount is {this._user.AvailableBalance}");
+                    Console.WriteLine("Amount can not be less than Rs. 1");
+                    _logger.LogError($"Paying amount is less than Rs. 1 for user: {_user.Username}");
+                    _logger.LogInfo($"Stopped process of payment for user: {_user.Username}");
+                }
+                else if (amount > _user.AvailableBalance)
+                {
+                    Console.WriteLine($"You can not pay more. Paying Rs. {amount} is more than available amount {this._user.AvailableBalance}.");
+                    _logger.LogError($"Not enough available balance in {_user.Username} user's account: Paying amount is Rs. {amount} and available amount is {this._user.AvailableBalance}");
                     _logger.LogInfo($"Payment stopped for user: {_user.Username}.");
                 }
                 else
@@ -139,18 +158,18 @@
 
             public void Refund(decimal amount)
             {
-                _logger.LogInfo($"Refund initiated of amount {amount} for user: {_user.Username}...");
+                _logger.LogInfo($"Refund initiated of amount Rs. {amount} for user: {_user.Username}...");
                 if (_user.paymentHistory.Contains(amount))
                 {
                     _refundObj.Refund(amount);
                     _user.AvailableBalance += amount;
                     _user.paymentHistory.Remove(amount);
-                    _logger.LogInfo($"Refund of amount {amount} completed successfully for user: {_user.Username}.");
+                    _logger.LogInfo($"Refund of amount Rs. {amount} completed successfully for user: {_user.Username}.");
                 }
                 else
                 {
-                    Console.WriteLine($"No entry found for amount {amount} in your payment history.");
-                    _logger.LogError($"No entry found for amount {amount} in payment history user: {_user.Username}");
+                    Console.WriteLine($"No entry found for amount Rs. {amount} in your payment history.");
+                    _logger.LogError($"No entry found for amount Rs. {amount} in payment history user: {_user.Username}");
                 }
             }
         }
@@ -201,30 +220,110 @@
          */
         public static void main(String[] args)
         {
-            User user = new User("Meet Rajpal", 1500);
+            Console.Write("Enter your name: ");
+            string? uname = Console.ReadLine();
 
-            ConsoleLogger consoleLogger = new ConsoleLogger();
-            FileLogger fileLogger = new FileLogger();
+            if (string.IsNullOrEmpty(uname) || string.IsNullOrWhiteSpace(uname))
+            {
+                Console.WriteLine("User name is required it can not be empty.");
+            }
+            else
+            {
+                Console.Write("Enter initial opening balance: ");
+                decimal openingBalance = Convert.ToDecimal(Console.ReadLine());
 
-            UPIPayment upiPayment = new UPIPayment();
+                if (openingBalance < 1000)
+                {
+                    Console.WriteLine("Opening balance can not be less than Rs. 1000.");
+                }
+                else
+                {
+                    ConsoleLogger consoleLogger = new ConsoleLogger();
+                    FileLogger fileLogger = new FileLogger();
 
-            PaymentProcessor paymentProcessor = new PaymentProcessor(user, upiPayment, fileLogger);
+                    UPIPayment upiPayment = new UPIPayment();
+                    CashPayment cashPayment = new CashPayment();
+                    CreditCardPayment creditCardPayment = new CreditCardPayment();
 
-            Console.WriteLine($"Initial available balance for {user.Username} is {user.AvailableBalance}\n");
+                    PaymentProcessor paymentProcessor;
+                    RefundProcessor refundProcessor;
 
-            paymentProcessor.Pay(555.25M);
-            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                    User user = new User(uname, openingBalance, fileLogger);
 
-            paymentProcessor.Pay(1000);
-            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                    Console.WriteLine($"Initial available balance for {user.Username} is {user.AvailableBalance}\n");
 
-            RefundProcessor refundProcessor = new RefundProcessor(user, upiPayment, consoleLogger);
+                    int opChoice = 1, payChoice;
+                    decimal amount = 0;
 
-            refundProcessor.Refund(555.25M);
-            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                    while (opChoice < 5)
+                    {
+                        Console.WriteLine("Enter what you want to do:\n1. Do Payment\n2. Get Refund\n3. Add Balance\n4. Show Available Balance\n5. Exit");
+                        opChoice = Convert.ToInt32(Console.ReadLine());
 
-            refundProcessor.Refund(130);
-            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                        switch (opChoice)
+                        {
+                            case 1:
+                                Console.WriteLine("Select mode of payment:\n1. Cash\n2. UPI\n3. Credit Card");
+                                payChoice = Convert.ToInt32(Console.ReadLine());
+
+                                Console.Write("Enter paying amount: ");
+                                amount = Convert.ToDecimal(Console.ReadLine());
+
+                                switch (payChoice)
+                                {
+                                    case 1:
+                                        paymentProcessor = new PaymentProcessor(user, cashPayment, consoleLogger);
+                                        paymentProcessor.Pay(amount);
+                                        break;
+
+                                    case 2:
+                                        paymentProcessor = new PaymentProcessor(user, upiPayment, consoleLogger);
+                                        paymentProcessor.Pay(amount);
+                                        break;
+
+                                    case 3:
+                                        paymentProcessor = new PaymentProcessor(user, creditCardPayment, consoleLogger);
+                                        paymentProcessor.Pay(amount);
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("Invalid choice for mode of payment. Please enter 1 to 3 only.");
+                                        break;
+                                }
+                                break;
+
+                            case 2:
+                                Console.Write("Enter the amount you paid before and now you want refund of it: ");
+                                amount = Convert.ToDecimal(Console.ReadLine());
+
+                                refundProcessor = new RefundProcessor(user, upiPayment, fileLogger);
+                                refundProcessor.Refund(amount);
+                                break;
+
+                            case 3:
+                                Console.Write("Enter amount you want to add to your available balance: ");
+                                amount = Convert.ToDecimal(Console.ReadLine());
+
+                                user.AddBalance(amount);
+                                break;
+
+                            case 4:
+                                Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                                break;
+
+                            case 5:
+                                Console.WriteLine("Program terminated successfully.");
+                                break;
+
+                            default:
+                                Console.WriteLine("Invalid input. Please enter only 1 to 4.");
+                                break;
+                        }
+
+                        Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                    }
+                }
+            }
         }
     }
 }
