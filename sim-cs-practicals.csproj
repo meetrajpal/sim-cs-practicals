@@ -6,6 +6,11 @@
     <RootNamespace>sim_cs_practicals</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject></StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="practical8\repository\" />
+  </ItemGroup>
 
 </Project>
