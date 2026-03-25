@@ -1,6 +1,6 @@
-﻿using sim_cs_practicals.practical7.srp_dip;
-using sim_cs_practicals.practical7.isp_lsp;
+﻿using sim_cs_practicals.practical7.isp_lsp;
 using sim_cs_practicals.practical7.ocp_lsp;
+using sim_cs_practicals.practical7.srp_dip;
 
 namespace sim_cs_practicals.practical7
 {
@@ -31,7 +31,6 @@ namespace sim_cs_practicals.practical7
                         FileLogger fileLogger = FileLogger.GetInstance();
 
                         UPIPayment upiPayment = UPIPayment.GetInstance();
-                        CashPayment cashPayment = CashPayment.GetInstance();
                         CreditCardPayment creditCardPayment = CreditCardPayment.GetInstance();
 
                         PaymentProcessor paymentProcessor;
@@ -47,69 +46,95 @@ namespace sim_cs_practicals.practical7
                         while (opChoice < 5)
                         {
                             Console.WriteLine("Enter what you want to do:\n1. Do Payment\n2. Get Refund\n3. Add Balance\n4. Show Available Balance\n5. Exit");
-                            opChoice = Convert.ToInt32(Console.ReadLine());
 
-                            switch (opChoice)
+                            if (int.TryParse(Console.ReadLine(), out opChoice))
                             {
-                                case 1:
-                                    Console.Write("Enter paying amount: ");
-                                    amount = Convert.ToDecimal(Console.ReadLine());
+                                switch (opChoice)
+                                {
+                                    case 1:
+                                        Console.Write("Enter paying amount: ");
 
-                                    Console.WriteLine("Select mode of payment:\n1. Cash\n2. UPI\n3. Credit Card");
-                                    payChoice = Convert.ToInt32(Console.ReadLine());
+                                        if (decimal.TryParse(Console.ReadLine(), out amount))
+                                        {
+                                            Console.WriteLine("Select mode of payment:\n1. UPI\n2. Credit Card");
 
-                                    switch (payChoice)
-                                    {
-                                        case 1:
-                                            paymentProcessor = new PaymentProcessor(user, cashPayment, consoleLogger);
-                                            paymentProcessor.Pay(amount);
-                                            break;
+                                            if (int.TryParse(Console.ReadLine(), out payChoice))
+                                            {
+                                                switch (payChoice)
+                                                {
+                                                    case 1:
+                                                        paymentProcessor = new PaymentProcessor(user, upiPayment, consoleLogger);
+                                                        paymentProcessor.Pay(amount);
+                                                        break;
 
-                                        case 2:
-                                            paymentProcessor = new PaymentProcessor(user, upiPayment, consoleLogger);
-                                            paymentProcessor.Pay(amount);
-                                            break;
+                                                    case 2:
+                                                        paymentProcessor = new PaymentProcessor(user, creditCardPayment, consoleLogger);
+                                                        paymentProcessor.Pay(amount);
+                                                        break;
 
-                                        case 3:
-                                            paymentProcessor = new PaymentProcessor(user, creditCardPayment, consoleLogger);
-                                            paymentProcessor.Pay(amount);
-                                            break;
+                                                    default:
+                                                        Console.WriteLine("Invalid choice for mode of payment. Please enter 1 or 2 only.");
+                                                        break;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine("Invalid input. Please select mode using numbers 1 or 2 only.");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter amount in numbers only.");
+                                        }
 
-                                        default:
-                                            Console.WriteLine("Invalid choice for mode of payment. Please enter 1 to 3 only.");
-                                            break;
-                                    }
-                                    break;
+                                        break;
 
-                                case 2:
-                                    Console.Write("Enter the amount you paid before and now you want refund of it: ");
-                                    amount = Convert.ToDecimal(Console.ReadLine());
+                                    case 2:
+                                        Console.Write("Enter the amount you paid before and now you want refund of it: ");
 
-                                    refundProcessor = new RefundProcessor(user, upiPayment, fileLogger);
-                                    refundProcessor.Refund(amount);
-                                    break;
+                                        if (decimal.TryParse(Console.ReadLine(), out amount))
+                                        {
+                                            refundProcessor = new RefundProcessor(user, upiPayment, fileLogger);
+                                            refundProcessor.Refund(amount);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter amount in numbers only.");
+                                        }
+                                        break;
 
-                                case 3:
-                                    Console.Write("Enter amount you want to add to your available balance: ");
-                                    amount = Convert.ToDecimal(Console.ReadLine());
+                                    case 3:
+                                        Console.Write("Enter amount you want to add to your available balance: ");
 
-                                    user.AddBalance(amount);
-                                    break;
+                                        if (decimal.TryParse(Console.ReadLine(), out amount))
+                                        {
+                                            user.AddBalance(amount);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid input. Please enter amount in numbers only.");
+                                        }
+                                        break;
 
-                                case 4:
-                                    Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
-                                    break;
+                                    case 4:
+                                        Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}");
+                                        break;
 
-                                case 5:
-                                    Console.WriteLine("Program terminated successfully.");
-                                    break;
+                                    case 5:
+                                        Console.WriteLine("Program terminated successfully.");
+                                        break;
 
-                                default:
-                                    Console.WriteLine("Invalid input. Please enter only 1 to 4.");
-                                    break;
+                                    default:
+                                        Console.WriteLine("Invalid input. Please enter only numbers from 1 to 5.");
+                                        break;
+                                }
+
+                                Console.WriteLine("");
                             }
-
-                            Console.WriteLine($"Available balance for {user.Username} is {user.AvailableBalance}\n");
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please select operations using numbers 1 to 5 only.");
+                            }
                         }
                     }
                 }

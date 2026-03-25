@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="practical8\repository\" />
+    <Compile Remove="practical8\repository\**" />
+    <EmbeddedResource Remove="practical8\repository\**" />
+    <None Remove="practical8\repository\**" />
   </ItemGroup>
 
 </Project>
