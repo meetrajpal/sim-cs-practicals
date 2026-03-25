@@ -7,5 +7,4 @@
   <Project Path="practical6/practical6.csproj" Id="ced1e124-9120-499b-88a6-13714f862a06" />
   <Project Path="practical7/practical7.csproj" Id="160d867a-ba72-43fe-9c5b-344396b632ef" />
   <Project Path="practical8/practical8.csproj" Id="81ec04bb-7e67-48ea-b36b-5ed932a90b65" />
-  <Project Path="sim-cs-practicals.csproj" />
 </Solution>
