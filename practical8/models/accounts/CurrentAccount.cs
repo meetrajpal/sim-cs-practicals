@@ -1,14 +1,14 @@
-﻿using sim_cs_practicals.practical8.interfaces;
+﻿using practical8.interfaces;
 
-namespace sim_cs_practicals.practical8.model.accounts
+namespace practical8.models.accounts
 {
     class CurrentAccount : Account, IDepositable, IWithdrawable
     {
 
-        public CurrentAccount(long accNo, Customer customer, decimal balance) : base(accNo, customer, balance) { }
+        public CurrentAccount(string accNo, Customer customer, decimal balance, int pin) : base(accNo, customer, balance, pin) { }
         public override string GetAccountType()
         {
-            return "CURRENT";
+            return "Current";
         }
 
         public void Deposit(decimal amount)

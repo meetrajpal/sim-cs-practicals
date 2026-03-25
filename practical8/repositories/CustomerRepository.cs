@@ -1,24 +1,36 @@
-﻿using sim_cs_practicals.practical8.model;
+﻿using practical8.models;
 
-namespace sim_cs_practicals.practical8.repository
+namespace practical8.repositories;
+
+class CustomerRepository
 {
-    class CustomerRepository
+    private List<Customer> _customers = new List<Customer>();
+
+    private static CustomerRepository? _instance;
+    private CustomerRepository() { }
+
+    public static CustomerRepository GetInstance()
     {
-        private List<Customer> _customer = new List<Customer>();
-
-        public void AddCustomer(Customer newAcc)
+        if (_instance == null)
         {
-            _customer.Add(newAcc);
-        }
+            _instance = new CustomerRepository();
 
-        public Customer? GetCustomer(long custId)
-        {
-            return _customer.Find((obj) => obj.CustomerId == custId);
         }
+        return _instance;
+    }
+    public Customer? AddCustomer(Customer newCust)
+    {
+        _customers.Add(newCust);
+        return GetCustomer(newCust.CustomerId);
+    }
 
-        public List<Customer> GetCustomers(string name)
-        {
-            return _customer.FindAll((obj) => obj.Name.Equals(name));
-        }
+    public Customer? GetCustomer(string custId)
+    {
+        return _customers.Find((obj) => obj.CustomerId.Equals(custId));
+    }
+
+    public IReadOnlyList<Customer> GetAllCustomers()
+    {
+        return _customers.AsReadOnly();
     }
 }

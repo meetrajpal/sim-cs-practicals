@@ -1,14 +1,20 @@
-﻿using sim_cs_practicals.practical8.events;
-using sim_cs_practicals.practical8.model.accounts;
+﻿using practical8.events;
+using practical8.models.accounts;
 
-namespace sim_cs_practicals.practical8.model
+namespace practical8.models
 {
-    sealed class Customer
+    class Customer
     {
-        public long CustomerId { get; private set; }
-        public string Name { get; private set; }
+        public string CustomerId { get; set; }
+        public string Name { get; set; }
 
         private List<Account> _accounts = new List<Account>();
+
+        public Customer(string custId, string name)
+        {
+            CustomerId = custId;
+            Name = name;
+        }
 
         public void AddAccount(Account account)
         {

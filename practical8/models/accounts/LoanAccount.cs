@@ -1,14 +1,14 @@
-﻿using sim_cs_practicals.practical8.interfaces;
+﻿using practical8.interfaces;
 
-namespace sim_cs_practicals.practical8.model.accounts
+namespace practical8.models.accounts
 {
     class LoanAccount : Account, IWithdrawable
     {
-        public LoanAccount(long accNo, Customer customer, decimal balance) : base(accNo, customer, balance) { }
+        public LoanAccount(string accNo, Customer customer, decimal balance, int pin) : base(accNo, customer, balance, pin) { }
 
         public override string GetAccountType()
         {
-            return "LOAN";
+            return "Loan";
         }
 
         public decimal Withdraw(decimal amount)
