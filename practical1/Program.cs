@@ -1,8 +1,8 @@
 ﻿namespace sim_cs_practicals.practical1
 {
-    class Practical1
+    class Program
     {
-        public static void main(String[] args)
+        public static void Main(String[] args)
         {
             Console.WriteLine("Arithmetic Operations: \n");
 

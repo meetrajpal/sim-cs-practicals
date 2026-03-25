@@ -1,8 +1,8 @@
 ﻿namespace sim_cs_practicals.practical4
 {
-    class Practical4
+    class Program
     {
-        public static void main(String[] args)
+        public static void Main(String[] args)
         {
             Console.Write("Enter student name: ");
             string? name = Console.ReadLine();

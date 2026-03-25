@@ -1,8 +1,8 @@
 ﻿namespace sim_cs_practicals.practical6
 {
-    class Practical6
+    class Program
     {
-        public static void main(String[] args)
+        public static void Main(String[] args)
         {
             ProcessBusinessLogic.Subscribe(Subscriber.bl_ProcessComplete);
 

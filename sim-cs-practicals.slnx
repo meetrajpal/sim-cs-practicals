@@ -1,3 +1,11 @@
 <Solution>
+  <Project Path="practical1/practical1.csproj" Id="f61f154e-684b-4ded-acf1-c32473118686" />
+  <Project Path="practical2/practical2.csproj" Id="5d841a96-94cd-4b2d-985d-4ba35c926cbf" />
+  <Project Path="practical3/practical3.csproj" Id="2417851f-11ad-4459-9e82-cd4ef2fe3023" />
+  <Project Path="practical4/practical4.csproj" Id="67aa30aa-9423-45b9-b239-a3b909dc7f40" />
+  <Project Path="practical5/practical5.csproj" Id="85527d9c-19c8-405e-b4aa-2bcb38f22bde" />
+  <Project Path="practical6/practical6.csproj" Id="ced1e124-9120-499b-88a6-13714f862a06" />
+  <Project Path="practical7/practical7.csproj" Id="160d867a-ba72-43fe-9c5b-344396b632ef" />
+  <Project Path="practical8/practical8.csproj" Id="81ec04bb-7e67-48ea-b36b-5ed932a90b65" />
   <Project Path="sim-cs-practicals.csproj" />
 </Solution>

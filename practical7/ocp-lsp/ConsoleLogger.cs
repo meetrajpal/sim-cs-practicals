@@ -18,8 +18,8 @@
         /// <summary>
         /// This method will return single instance of this class
         /// </summary>
-        /// <returns></returns>
-        public static ConsoleLogger GetInstance() 
+        /// <returns>Instance of Console Logger</returns>
+        public static ConsoleLogger GetInstance()
         {
             if (Instance == null)
             {

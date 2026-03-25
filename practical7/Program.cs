@@ -4,9 +4,9 @@ using sim_cs_practicals.practical7.srp_dip;
 
 namespace sim_cs_practicals.practical7
 {
-    class Practical7
+    class Program
     {
-        public static void main(String[] args)
+        public static void Main(String[] args)
         {
             Console.Write("Enter your name: ");
             string? uname = Console.ReadLine();

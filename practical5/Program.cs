@@ -1,8 +1,8 @@
 ﻿namespace sim_cs_practicals.practical5
 {
-    class Practical5
+    class Program
     {
-        public static void main(String[] args)
+        public static void Main(String[] args)
         {
 
             int[] arr = { 71, 32, 63, 44, 95 };
