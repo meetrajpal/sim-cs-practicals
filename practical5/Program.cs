@@ -1,28 +1,27 @@
-﻿namespace sim_cs_practicals.practical5
+﻿namespace practical5;
+
+internal class Program
 {
-    class Program
+    public static void Main(String[] args)
     {
-        public static void Main(String[] args)
+
+        int[] arr = { 71, 32, 63, 44, 95 };
+
+        for (int i = 0; i <= arr.Length; i++)
         {
-
-            int[] arr = { 71, 32, 63, 44, 95 };
-
-            for (int i = 0; i <= arr.Length; i++)
+            try
             {
-                try
-                {
-                    Console.WriteLine($"{i + 1}: {arr[i]}");
-                }
-                catch (IndexOutOfRangeException ex)
-                {
-                    Console.WriteLine($"You are trying to access index that is not available in accepted range of array. \n{ex.Message}");
-                }
-                finally
-                {
-                    Console.WriteLine("Finally block executed.\n");
-                }
+                Console.WriteLine($"{i + 1}: {arr[i]}");
             }
-
+            catch (IndexOutOfRangeException ex)
+            {
+                Console.WriteLine($"You are trying to access index that is not available in accepted range of array. \n{ex.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("Finally block executed.\n");
+            }
         }
+
     }
 }
