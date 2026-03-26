@@ -1,13 +1,12 @@
-﻿namespace sim_cs_practicals.practical6
-{
-    class Program
-    {
-        public static void Main(String[] args)
-        {
-            ProcessBusinessLogic.Subscribe(Subscriber.bl_ProcessComplete);
+﻿namespace practical6;
 
-            ProcessBusinessLogic publisher = ProcessBusinessLogic.GetInstance();
-            publisher.StartProcess();
-        }
+internal class Program
+{
+    public static void Main(String[] args)
+    {
+        ProcessBusinessLogic.Subscribe(Subscriber.bl_ProcessComplete);
+
+        ProcessBusinessLogic publisher = ProcessBusinessLogic.GetInstance();
+        publisher.StartProcess();
     }
 }
