@@ -1,9 +1,8 @@
-﻿namespace sim_cs_practicals.practical3.inheritance
-{
+﻿namespace practical3.inheritance;
 
-    //Inheritance
-    class Sponsor
-    {
-        protected string _owner = "Rakuteen";
-    }
+
+//Inheritance
+internal class Sponsor
+{
+    protected string _owner = "Rakuteen";
 }

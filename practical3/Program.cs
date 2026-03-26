@@ -1,26 +1,21 @@
-﻿using sim_cs_practicals.practical3.abstraction;
-using sim_cs_practicals.practical3.inheritance;
-using sim_cs_practicals.practical3.polymorphism;
+﻿namespace practical3;
 
-namespace sim_cs_practicals.practical3
+internal class Program
 {
-    class Program
+    public static void Main(String[] args)
     {
-        public static void Main(String[] args)
-        {
-            Team teamObj = new Team("CSK");
-            teamObj.PrintInfo();
+        Team teamObj = new Team("CSK");
+        teamObj.PrintInfo();
 
-            Bird bird = new Bird();
-            bird.Voice();
-            Bird duck = new Duck();
-            duck.Voice();
+        Bird bird = new Bird();
+        bird.Voice();
+        Bird duck = new Duck();
+        duck.Voice();
 
-            Laptop laptop = new Laptop();
-            laptop.Brand = "Lenovo";
-            laptop.Model = "Legion LOQ";
-            laptop.LaptopDetails();
-            // laptop.MotherboardDetails(); accessing this method will give error because it is private to its class
-        }
+        Laptop laptop = new Laptop();
+        laptop.Brand = "Lenovo";
+        laptop.Model = "Legion LOQ";
+        laptop.LaptopDetails();
+        // laptop.MotherboardDetails(); accessing this method will give error because it is private to its class
     }
 }
