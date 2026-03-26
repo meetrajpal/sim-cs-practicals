@@ -7,13 +7,18 @@ namespace practical8.models
     {
         public string CustomerId { get; set; }
         public string Name { get; set; }
+        public int Mobile { get; set; }
+
+        public string Email { get; set; }
 
         private List<Account> _accounts = new List<Account>();
 
-        public Customer(string custId, string name)
+        public Customer(string custId, string name, int mobile, string email)
         {
             CustomerId = custId;
             Name = name;
+            Mobile = mobile;
+            Email = email;
         }
 
         public void AddAccount(Account account)
@@ -29,7 +34,7 @@ namespace practical8.models
 
         public void TransactionCompleted(object? sender, TransactionCompletedEventArgs args)
         {
-            Console.WriteLine($"{args.Msg}");
+            Console.WriteLine($"{args.Message}");
         }
     }
 }

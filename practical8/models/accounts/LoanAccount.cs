@@ -21,6 +21,7 @@ namespace practical8.models.accounts
             {
                 Balance -= amount;
                 Console.WriteLine($"Amount {amount} withdrawed successfully.");
+                RaiseOnTransactionComplete(new events.TransactionCompletedEventArgs() { AccountNumber = this.AccountNumber, Customer = this.Owner, Message = $"Amount {amount} withdrawed successfully." });
             }
             return Balance;
         }

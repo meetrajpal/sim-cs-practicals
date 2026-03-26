@@ -22,9 +22,9 @@ namespace practical8.services
             return _instance;
         }
 
-        public Customer? CreateCustomer(string name)
+        public Customer? CreateCustomer(string name, int mobile, string email)
         {
-            Customer? newCustomer = new Customer(Utility.GenerateCustomerId(), name);
+            Customer? newCustomer = new Customer(Utility.GenerateCustomerId(), name, mobile, email);
             newCustomer = _customerRepo?.AddCustomer(newCustomer);
             return newCustomer;
         }

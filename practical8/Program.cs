@@ -1,5 +1,7 @@
-﻿using practical8.models;
+﻿using practical8.interfaces;
+using practical8.models;
 using practical8.models.accounts;
+using practical8.notifications;
 using practical8.repositories;
 using practical8.services;
 
@@ -9,6 +11,13 @@ namespace practical8
     {
         public static void Main(String[] args)
         {
+            INotification notification = new TextNotification();
+            Account.Subscribe(notification.NotifyCustomer);
+
+            notification = new EmailNotification();
+            Account.Subscribe(notification.NotifyCustomer);
+
+
             using AccountService accountService = AccountService.GetInstance(AccountRepository.GetInstance(), CustomerRepository.GetInstance());
             using CustomerService customerService = CustomerService.GetInstance(CustomerRepository.GetInstance());
             using TransactionService transactionService = TransactionService.GetInstance(AccountRepository.GetInstance());
@@ -16,9 +25,9 @@ namespace practical8
             int choice = 0;
             Account? newAccount = null;
 
-            while (choice < 6)
+            while (choice < 7)
             {
-                Console.Write("Enter what you want to perform from below Menu\n1 Create Customer\n2 Create Account (if you are new user then create a customer first)\n3 Deposit Money (you need account number and pin)\n4 Withdraw Money (you need account number and pin)\n5 Get monthly interest (you need account number and pin)\n6 Exit\nEnter your choice in numbers from 1 to 5 only: ");
+                Console.Write("Enter what you want to perform from below Menu\n1 Create Customer\n2 Create Account (if you are new user then create a customer first)\n3 Deposit Money (you need account number and pin)\n4 Withdraw Money (you need account number and pin)\n5 Get monthly interest (you need account number and pin)\n6 Show Available Balance (you need account number and pin)\n7 Exit\nEnter your choice in numbers from 1 to 5 only: ");
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
                     switch (choice)
@@ -33,19 +42,36 @@ namespace practical8
                             }
                             else
                             {
-                                Customer? newCustomer = null;
+                                Console.Write("Enter your 10 digit mobile number: ");
+                                if (int.TryParse(Console.ReadLine(), out int mobile) && mobile.ToString().Length == 10)
+                                {
+                                    Console.Write("Enter your email: ");
+                                    string? email = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
+                                    {
+                                        Console.WriteLine("Email is required. It can not be empty.");
+                                    }
+                                    else
+                                    {
+                                        Customer? newCustomer = null;
 
-                                try
-                                {
-                                    newCustomer = customerService.CreateCustomer(custName);
+                                        try
+                                        {
+                                            newCustomer = customerService.CreateCustomer(custName, mobile, email);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine($"An error occured while creating a new customer.\n{ex.Message}");
+                                        }
+                                        if (newCustomer != null)
+                                        {
+                                            Console.WriteLine($"Customer created successfully with Customer ID: {newCustomer.CustomerId} \nPlease note this ID for further operations.");
+                                        }
+                                    }
                                 }
-                                catch (Exception ex)
+                                else
                                 {
-                                    Console.WriteLine($"An error occured while creating a new customer.\n{ex.Message}");
-                                }
-                                if (newCustomer != null)
-                                {
-                                    Console.WriteLine($"Customer created successfully with Customer ID: {newCustomer.CustomerId} \nPlease note this ID for further operations.");
+                                    Console.WriteLine("Invalid input. Please enter 10 digits numbers only. OR  Mobile number can not be empty.");
                                 }
                             }
                             break;
@@ -301,17 +327,48 @@ namespace practical8
                             break;
 
                         case 6:
+                            Console.WriteLine("Enter your Account Number: ");
+                            accNo = Console.ReadLine();
+
+                            if (string.IsNullOrEmpty(accNo) || string.IsNullOrWhiteSpace(accNo))
+                            {
+                                Console.WriteLine("Account number is required. It can not be empty.");
+                            }
+                            else
+                            {
+
+                                Console.Write("Enter 4 digit numeric pin for your account: ");
+                                if (int.TryParse(Console.ReadLine(), out int pin) && pin.ToString().Length == 4)
+                                {
+                                    try
+                                    {
+                                        transactionService.GetAccountBalance(accNo, pin);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"An error occured while getting account balance.\n{ex.Message}");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid input. Enter 4 digit numeric pin only.");
+                                }
+
+                            }
+                            break;
+
+                        case 7:
                             Console.WriteLine("Program stopped successfully.");
                             break;
 
                         default:
-                            Console.WriteLine("Invalid input. Please select options from menu by entering numbers from 1 to 6 only.");
+                            Console.WriteLine("Invalid input. Please select options from menu by entering numbers from 1 to 7 only.");
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please select options from menu by entering numbers from 1 to 6 only.");
+                    Console.WriteLine("Invalid input. Please select options from menu by entering numbers from 1 to 7 only.");
                 }
                 Console.WriteLine("");
             }

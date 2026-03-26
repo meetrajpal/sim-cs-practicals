@@ -8,10 +8,12 @@ namespace practical8.services
 {
     class AccountService : IDisposable
     {
+        #region Fields
         private static AccountService? _instance;
         private static AccountRepository? _accountRepo;
         private static CustomerRepository? _customerRepo;
 
+        #endregion
         private AccountService() { }
 
         public static AccountService GetInstance(AccountRepository accountRepo, CustomerRepository customerRepo)
@@ -64,12 +66,17 @@ namespace practical8.services
                         return null;
                 }
             }
+
+            customer.AddAccount(newAccount);
+
             return newAccount;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _instance = null;
+            _accountRepo = null;
+            _customerRepo = null;
         }
 
         public Account? GetAccount(string accNo)
