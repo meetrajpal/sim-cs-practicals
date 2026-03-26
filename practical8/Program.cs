@@ -1,4 +1,6 @@
-﻿namespace practical8
+﻿using System.Text.RegularExpressions;
+
+namespace practical8
 {
     class Program
     {
@@ -17,7 +19,7 @@
 
             int choice = 0;
             Account? newAccount = null;
-
+            Regex emailRegEx = new Regex("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
             while (choice < 7)
             {
                 Console.Write("Enter what you want to perform from below Menu\n1 Create Customer\n2 Create Account (Customer ID required)\n3 Deposit Money (Account number and PIN is required)\n4 Withdraw Money (Account number and PIN is required)\n5 Get monthly interest (Account number and PIN is required)\n6 Show Available Balance (Account number and PIN is required)\n7 Exit\nEnter your choice in numbers from 1 to 5 only: ");
@@ -29,9 +31,9 @@
                             Console.Write("Enter customer name: ");
                             string? custName = Console.ReadLine();
 
-                            if (string.IsNullOrEmpty(custName) || string.IsNullOrWhiteSpace(custName))
+                            if (string.IsNullOrEmpty(custName) || string.IsNullOrWhiteSpace(custName) || custName.Length < 5)
                             {
-                                Console.WriteLine("Customer name is required. It can not be empty.");
+                                Console.WriteLine("Customer name is required. It can not be empty. OR Name must be minimum of 5 characters");
                             }
                             else
                             {
@@ -40,9 +42,9 @@
                                 {
                                     Console.Write("Enter your email: ");
                                     string? email = Console.ReadLine();
-                                    if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
+                                    if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email) || !emailRegEx.IsMatch(email))
                                     {
-                                        Console.WriteLine("Email is required. It can not be empty.");
+                                        Console.WriteLine("Email is required. It can not be empty. OR Enter and email in correct format.");
                                     }
                                     else
                                     {

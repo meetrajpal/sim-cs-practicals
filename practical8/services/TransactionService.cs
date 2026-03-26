@@ -129,7 +129,7 @@ internal class TransactionService : IDisposable
                 }
                 else
                 {
-                    Console.WriteLine($"Your current month interest amount is Rs. {interestBearableAccount.CalculateInterest()} according to your available balance Rs. {account.Balance}");
+                    Console.WriteLine($"Your current month interest amount is Rs. {interestBearableAccount.CalculateInterest():N4} according to your available balance Rs. {account.Balance}");
                 }
             }
             else
