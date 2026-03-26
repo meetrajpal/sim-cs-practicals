@@ -1,11 +1,10 @@
-﻿namespace sim_cs_practicals.practical7.isp_lsp
-{
+﻿namespace practical7.isp_lsp;
 
-    /// <summary>
-    /// IRefundable interface creates a contract list of required methods for refund purposes.
-    /// </summary>
-    interface IRefundable
-    {
-        public void Refund(decimal amount);
-    }
+
+/// <summary>
+/// IRefundable interface creates a contract list of required methods for refund purposes.
+/// </summary>
+internal interface IRefundable
+{
+    public void Refund(decimal amount);
 }
