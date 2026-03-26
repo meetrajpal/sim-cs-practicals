@@ -1,11 +1,4 @@
-﻿using practical8.interfaces;
-using practical8.models;
-using practical8.models.accounts;
-using practical8.notifications;
-using practical8.repositories;
-using practical8.services;
-
-namespace practical8
+﻿namespace practical8
 {
     class Program
     {
@@ -27,7 +20,7 @@ namespace practical8
 
             while (choice < 7)
             {
-                Console.Write("Enter what you want to perform from below Menu\n1 Create Customer\n2 Create Account (if you are new user then create a customer first)\n3 Deposit Money (you need account number and pin)\n4 Withdraw Money (you need account number and pin)\n5 Get monthly interest (you need account number and pin)\n6 Show Available Balance (you need account number and pin)\n7 Exit\nEnter your choice in numbers from 1 to 5 only: ");
+                Console.Write("Enter what you want to perform from below Menu\n1 Create Customer\n2 Create Account (Customer ID required)\n3 Deposit Money (Account number and PIN is required)\n4 Withdraw Money (Account number and PIN is required)\n5 Get monthly interest (Account number and PIN is required)\n6 Show Available Balance (Account number and PIN is required)\n7 Exit\nEnter your choice in numbers from 1 to 5 only: ");
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
                     switch (choice)

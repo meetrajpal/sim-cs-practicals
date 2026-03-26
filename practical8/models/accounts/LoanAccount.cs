@@ -1,29 +1,40 @@
-﻿using practical8.interfaces;
+﻿namespace practical8.models.accounts;
 
-namespace practical8.models.accounts
+internal class LoanAccount : Account, IWithdrawable
 {
-    class LoanAccount : Account, IWithdrawable
+    #region Constructors
+    public LoanAccount(string accNo, Customer customer, decimal balance, int pin) : base(accNo, customer, balance, pin) { }
+
+    #endregion
+
+    #region Methods
+
+    // <summary>
+    /// This method shows type of account
+    /// </summary>
+    /// <returns>string of account type</returns>
+    public override string GetAccountType()
     {
-        public LoanAccount(string accNo, Customer customer, decimal balance, int pin) : base(accNo, customer, balance, pin) { }
+        return "Loan";
+    }
 
-        public override string GetAccountType()
+    /// <summary>
+    /// This method withdraws amount from account
+    /// </summary>
+    /// <param name="amount">decimal amount that is going to be withdrawn</param>
+    public void Withdraw(decimal amount)
+    {
+        if (amount < 1)
         {
-            return "Loan";
+            Console.WriteLine("You can not withdraw an amount less than Rs. 1");
         }
-
-        public decimal Withdraw(decimal amount)
+        else
         {
-            if (amount < 1)
-            {
-                Console.WriteLine("You can not withdraw an amount less than Rs. 1");
-            }
-            else
-            {
-                Balance -= amount;
-                Console.WriteLine($"Amount {amount} withdrawed successfully.");
-                RaiseOnTransactionComplete(new events.TransactionCompletedEventArgs() { AccountNumber = this.AccountNumber, Customer = this.Owner, Message = $"Amount {amount} withdrawed successfully." });
-            }
-            return Balance;
+            Balance -= amount;
+            Console.WriteLine($"Amount {amount} withdrawed successfully.");
+            RaiseOnTransactionComplete(new events.TransactionCompletedEventArgs() { AccountNumber = this.AccountNumber, Customer = this.Owner, Message = $"Amount {amount} withdrawed successfully." });
         }
     }
+
+    #endregion
 }

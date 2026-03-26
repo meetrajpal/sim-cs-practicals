@@ -1,0 +1,9 @@
+﻿global using practical8.enums;
+global using practical8.events;
+global using practical8.interfaces;
+global using practical8.models;
+global using practical8.models.accounts;
+global using practical8.notifications;
+global using practical8.repositories;
+global using practical8.services;
+global using practical8.utils;

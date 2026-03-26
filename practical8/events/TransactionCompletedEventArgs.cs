@@ -1,12 +1,15 @@
-﻿using practical8.models;
+﻿namespace practical8.events;
 
-namespace practical8.events
+/// <summary>
+/// This class is used as custom event arguements when any transacation is completed and it has data like message account number and customer details.
+/// </summary>
+internal class TransactionCompletedEventArgs : EventArgs
 {
-    class TransactionCompletedEventArgs : EventArgs
-    {
-        required public string Message { get; set; }
-        required public string AccountNumber { get; set; }
+    #region Properties
+    required public string Message { get; set; }
+    required public string AccountNumber { get; set; }
 
-        required public Customer Customer { get; set; }
-    }
+    required public Customer Customer { get; set; }
+
+    #endregion
 }
