@@ -4,6 +4,9 @@ internal class Program
 {
     public static void Main(String[] args)
     {
+
+        // Task 1 of arithmetic operations
+
         Console.WriteLine("Arithmetic Operations: \n");
 
         try
@@ -48,7 +51,7 @@ internal class Program
         }
 
 
-
+        // Task 2 for debugging
 
         Console.Write("\nGive any input to check weather its integer or not: ");
         string? userResponse = Console.ReadLine();
@@ -59,6 +62,7 @@ internal class Program
            int.TryParse will return boolean value if the string is parsable to integer and out parameter will have that integer value
            we can ignore the out parameter using: int.TryParse(userResponse, out _)
         */
+
         if (int.TryParse(userResponse, out int value))
         {
             Console.WriteLine($"The entered value {value} is an integer.\n");
